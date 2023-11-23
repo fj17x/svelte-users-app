@@ -1,5 +1,9 @@
 <script>
   import { goto } from "$app/navigation"
+  import { usersInfo } from "$lib/stores.js"
+  import { getUsersFunction } from "$lib/getUsersInfo.js"
+  import { onDestroy } from "svelte"
+  import { get } from "svelte/store"
 
   function goToCreate() {
     goto("/create")
@@ -8,6 +12,12 @@
   function goToView() {
     goto("/view")
   }
+  function refresh() {
+    location.reload()
+  }
+  getUsersFunction()
+
+  console.log("Fetched users and set.")
 </script>
 
 <h1 class="heading">Welcome to Users app</h1>
@@ -19,6 +29,7 @@
     Go to create user</button
   >
   <button class="btn btn-danger" on:click={goToView}>Go to view users</button>
+  <button class="btn btn-primary" on:click={refresh}>Refresh</button>
 </div>
 <hr />
 <br />
